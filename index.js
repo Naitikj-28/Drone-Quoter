@@ -15,6 +15,16 @@ var OpenMap = L.tileLayer('https://tile.openstreetmap.de/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 });
 
+//--------------------------------------------Map Filter-------------------------------------------//
+const baseMaps = {
+    "Google ": googleStreets,
+    "Natural": world,
+    "Road Map": OpenMap
+};
+
+const layerControl = L.control.layers(baseMaps).addTo(map);
+googleStreets.addTo(map);
+
 //-----------------------------------------Draw Polygon--------------------------------------------//
 
 const drawnItems = new L.FeatureGroup();
@@ -148,15 +158,6 @@ function toggleDrawing() {
     }
 }
 
-//--------------------------------------------Map Filter-------------------------------------------//
-const baseMaps = {
-    "Google ": googleStreets,
-    "Natural": world,
-    "Road Map": OpenMap
-};
-
-const layerControl = L.control.layers(baseMaps).addTo(map);
-googleStreets.addTo(map);
 
 //----------------------------------------------Second Part------------------------------------------------------------//
 //---------------------------------------Upload KML------------------------------------------------//
@@ -200,18 +201,21 @@ let currentKMLLayer;
 //-------------------------------Export Kml file function------------------------------------//
 function exportKML() {
     const kmlContent = generateKML();
-    const blob = new Blob([kmlContent], { type: 'application/vnd.google-earth.kml+xml' });
-    const link = document.createElement('a');
-    link.href = window.URL.createObjectURL(blob);
-    link.download = 'exported_area.kml';
-    link.click();
+    if (kmlContent) {  // Only proceed if there is valid KML content
+        const blob = new Blob([kmlContent], { type: 'application/vnd.google-earth.kml+xml' });
+        const link = document.createElement('a');
+        link.href = window.URL.createObjectURL(blob);
+        link.download = 'exported_area.kml';
+        link.click();
+    } else {
+        alert('No shapes to export. Please draw a shape first.');
+    }
 }
 
 function generateKML() {
     const layers = drawnItems.getLayers();
     if (layers.length === 0) {
-        alert('No features to export.');
-        return '';
+        return ''; // Return an empty string if no shapes are drawn
     }
 
     const kmlStart = '<?xml version="1.0" encoding="UTF-8"?>\n' +
@@ -239,7 +243,6 @@ function generateKML() {
 
     return kmlStart + kmlPlacemarks + kmlEnd;
 }
-
 
 //-------------------------------------------Fourth Part--------------------------------------------//
 //=-----------------------------DGPS Price Addition in Calculation-----------------------------//

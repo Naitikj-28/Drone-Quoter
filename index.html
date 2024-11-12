@@ -36,24 +36,6 @@
     <script src="https://unpkg.com/leaflet-draw/dist/leaflet.draw.js"></script>
     <script src="https://unpkg.com/leaflet-omnivore/leaflet-omnivore.min.js"></script>
     <script src="index.js"></script>
-    <script>
-        document.addEventListener('mousemove', function (e) {
-            var bodyRect = document.body.getBoundingClientRect();
-            var h1Rect = document.querySelector('h1').getBoundingClientRect();
-
-            // For body background
-            var x = e.clientX - bodyRect.left;
-            var y = e.clientY - bodyRect.top;
-            document.body.style.setProperty('--x', x + 'px');
-            document.body.style.setProperty('--y', y + 'px');
-
-            // For h1 background
-            var hx = e.clientX - h1Rect.left;
-            var hy = e.clientY - h1Rect.top;
-            document.querySelector('h1').style.setProperty('--hx', hx + 'px');
-            document.querySelector('h1').style.setProperty('--hy', hy + 'px');
-        });
-    </script>
 </body>
 
 </html>
