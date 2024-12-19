@@ -30,17 +30,13 @@ const drawnItems = new L.FeatureGroup();
 map.addLayer(drawnItems);
 
 let drawControl;
-let hectaresValue = 0;  // New variable to store hectares value
 
 function initDrawControl() {
     drawControl = new L.Control.Draw({
-        edit: {
-            featureGroup: drawnItems
-        },
         draw: {
             polygon: {
                 shapeOptions: {
-                    color: 'blue',
+                    color: 'green',
                     fillColor: 'yellow',
                     fillOpacity: 0.5,
                     weight: 2
@@ -58,7 +54,7 @@ function initDrawControl() {
             rectangle: true,
             circle: false,
             marker: false
-        }
+        },
     });
     map.addControl(drawControl);
 }
@@ -66,6 +62,20 @@ function initDrawControl() {
 function removeDrawControl() {
     if (drawControl) {
         map.removeControl(drawControl);
+    }
+}
+
+//-----------------------------------Drawing Function Key ---------------------------------------//
+function toggleDrawing() {
+    const drawCheckbox = document.getElementById('drawCheckbox');
+
+    if (drawCheckbox.checked) {
+        initDrawControl();
+        document.querySelector('.leaflet-draw-toolbar').style.display = 'block';
+    } else {
+        removeDrawControl();
+        drawnItems.clearLayers();
+        document.querySelector('.leaflet-draw-toolbar').style.display = 'none';
     }
 }
 
@@ -81,26 +91,6 @@ map.on('draw:created', function (e) {
     isPriceCalculated = false;
 });
 
-//-----------------------------------Drawing Function Key ---------------------------------------//
-function toggleDrawing() {
-    const drawCheckbox = document.getElementById('drawCheckbox');
-
-    if (drawCheckbox.checked) {
-        initDrawControl();
-        document.querySelector('.leaflet-draw-toolbar').style.display = 'block';
-    } else {
-        removeDrawControl();
-        drawnItems.clearLayers();
-        document.getElementById('hectares').value = "";
-
-        if (!isPriceCalculated) {
-            quotationElement.textContent = "Quotation: Rs 0.00";
-        }
-
-        isPriceCalculated = false;
-        document.querySelector('.leaflet-draw-toolbar').style.display = 'none';
-    }
-}
 
 //-----------------------------------Uploading KML file function--------------------------------
 function triggerFileInput() {
