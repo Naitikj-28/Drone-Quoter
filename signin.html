@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="AccionLAND.svg" type="image/svg+xml">
+    <title>AccionLAND Private Limited</title>
+    <link rel="stylesheet" href="signin.css">
+</head>
+
+<body>
+    <div class="signin-container">
+        <img src="AccionLAND.svg" alt="Logo" style="width: 100px; height: 100px;  transform: scale(2);">
+        <h1>AccionLAND Welcomes You!!</h1>
+        <form id="signin-form">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required /><br>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required /><br>
+            <button type="submit">Log In</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('signin-form').addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            const validUsername = "accionland";
+            const validPassword = "AccionLAND@2019";
+
+            if (username === validUsername && password === validPassword) {
+                sessionStorage.setItem('isLoggedIn', 'true');
+                window.location.href = 'index.html';
+            } else {
+                alert('Invalid username or password.');
+            }
+        });
+    </script>
+</body>
+
+</html>

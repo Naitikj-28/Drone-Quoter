@@ -1,0 +1,153 @@
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    background-image: url('./index1.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: #333;
+    height: auto;
+}
+
+/* Sign-in Container */
+.signin-container {
+    max-width: 500px;
+    margin: 50px auto;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    animation: fadeIn 0.5s ease-out;
+    width: 90%;
+}
+
+/* Heading */
+.signin-container h1 {
+    margin-bottom: 20px;
+    font-size: 28px;
+    font-weight: 600;
+    color: #333;
+    text-transform: uppercase;
+}
+
+/* Form Styles */
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+form label {
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #333;
+    text-align: left;
+    font-size: 22px;
+}
+
+form input[type="text"],
+form input[type="password"] {
+    margin-bottom: 20px;
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    width: 100%;
+    background-color: #f9f9f9;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+}
+
+form input[type="text"]:focus,
+form input[type="password"]:focus {
+    border-color: #007bff;
+    background-color: #e6f0ff;
+    outline: none;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.4);
+}
+
+form button[type="submit"] {
+    padding: 12px 20px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+form button[type="submit"]:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+form button[type="submit"]:focus {
+    outline: none;
+    box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
+}
+
+/* Media Queries for Small Screens (Mobile Devices) */
+@media (max-width: 768px) {
+
+    .signin-container {
+        margin: 20px auto;
+        padding: 20px;
+        max-width: 90%;
+    }
+
+    .signin-container h1 {
+        font-size: 22px;
+    }
+
+    form button[type="submit"] {
+        font-size: 14px;
+    }
+
+    form input[type="text"],
+    form input[type="password"] {
+        font-size: 14px;
+        padding: 10px;
+    }
+}
+
+/* Media Queries for Extra Small Screens (Very Small Phones) */
+@media (max-width: 480px) {
+
+    .signin-container {
+        margin-top: 20%;
+        padding: 15px;
+        max-width: 90%;
+    }
+
+    .signin-container h1 {
+        font-size: 18px;
+    }
+
+    form input[type="text"],
+    form input[type="password"] {
+        font-size: 12px;
+        padding: 8px;
+    }
+
+    form button[type="submit"] {
+        font-size: 12px;
+        padding: 10px;
+    }
+}
+
+/* Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

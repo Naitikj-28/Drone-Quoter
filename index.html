@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="AccionLAND.svg" type="image/svg+xml">
+    <title>Drone Survey Quotation - AccionLAND Pvt Ltd</title>
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-draw/dist/leaflet.draw.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <script>
+        if (!sessionStorage.getItem('isLoggedIn')) {
+            window.location.href = 'signin.html';
+        }
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <img id="img" src="AccionLAND.svg" alt="Logo">
+            <h1>Drone Survey Quotation Calculator</h1>
+        </div>
+        <div class="row">
+            <div class="firstbox">
+                <label for="fileInput">Upload KML:</label>
+                <div class="button-row ">
+                    <button id="uploadBtn" onclick="triggerFileInput()">Upload KML</button>
+                    <button id="removeBtn" onclick="removeUploadedKML()">Remove KML</button>
+                </div>
+                <input type="file" id="fileInput" accept=".kml" style="display: none" onchange="processKML(event)">
+                <div class="or-separator">
+                    <span>OR</span>
+                </div>
+                <input type="checkbox" id="drawCheckbox" onchange="toggleDrawing()"> Draw Area (Polygon)
+                <label>
+                    <button id="exportBtn" onclick="exportKML()">Export KML</button>
+                </label>
+                <label>KML Area in Hectares:</label>
+                <input type="number" id="hectares" readonly><br>
+
+                <label for="hectares1">Enter Area:</label>
+                <div class="input-row">
+                    <input type="number" id="hectares1" min="0" step="10">
+                    <select id="unitSelect" onchange="convertUnitToHectare()">
+                        <option value="hectares" selected>Hectares</option>
+                        <option value="sqm">Square Meters</option>
+                        <option value="sqkm">Square Kilometers</option>
+                        <option value="acres">Acres</option>
+                    </select>
+                </div>
+                <h3 style="display:none;">Converted Value in Hectares: <span id="convertedValue">0.00</span></h3>
+
+                <label>
+                    <input type="checkbox" id="dgps" onclick="Dgps()" disabled><u><i><b>D.G.P.S</b></i></u>
+                </label>
+                <div class="button-row">
+                    <button id="cp" class="cp" onclick="calculatePrice()">Calculate Price</button>
+                    <button id="clearBtn" class="clear-btn" onclick="clearAll()">
+                        <i class="fas fa-sync"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="secondbox">
+                <div id="Set1" class="Set1">
+                    <h2>Technical Specification</h2><br>
+                    <p>The no. of days to be taken for processing: <span id="rate2">0</span></p>
+                    <p>The no. of days to be taken for data collection: <span id="rate1">0</span></p>
+                    <p>The no. of flights to be taken by drone: <span id="no">0</span></p>
+                </div>
+                <div id="Set2" class="Set2">
+                    <p>Micro Category of Drone will be Deployed to the Site<br>
+                        Turnaround Time for any Project Initiation is 1-3 Days<br>
+                        DGPS Cost / Timeline May Vary Based on final Scope<br>
+                        Please Connect AccionLAND for any Drone/UAV or Geospatial Services</p>
+                    <p>Tentative Scope of Work:
+                        Topography Survey/Mapping,
+                        Contour Mapping (CM Level Interval)<br>
+                        Dataset Includes : Ortho Mosaic Image, Digital Surface/Terrain Model & 3D Point Cloud</p>
+                </div>
+            </div>
+        </div>
+        <div class="quotation-box">
+            <p id="quotation">Quotation: Rs 0.00</p>
+            <p>*This rate excludes GST, travel, local transportation, food, accommodation, and any permissions
+                required.</p>
+        </div>
+        <div class="footer">
+            <p style="font-size: 1.2rem;">
+                Website: <a href="https://www.accionland.com" target="_blank">www.accionland.com</a><br>
+                Contact: <a href="mailto:accionland@gmail.com">accionland@gmail.com</a><br>
+                Connect: <a href="tel:+919630722421">+91 9630722421</a>, <a href="tel:+919009068781">9009068781</a>
+            </p>
+        </div>
+    </div>
+    <div id="map-container"></div>
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet-draw/dist/leaflet.draw.js"></script>
+    <script src="https://unpkg.com/leaflet-omnivore/leaflet-omnivore.min.js"></script>
+    <script src="index.js"></script>
+</body>
+
+</html>
