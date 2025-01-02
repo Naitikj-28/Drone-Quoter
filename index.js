@@ -407,3 +407,4 @@ function clearAll() {
     document.getElementById("dgps").disabled = true;
     document.getElementById("dgps").checked = false;
 }
+

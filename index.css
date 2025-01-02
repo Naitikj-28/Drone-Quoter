@@ -296,19 +296,49 @@ button {
     justify-content: center;
     align-items: center;
     transition: background-color 0.3s ease;
+    position: relative;
 }
 
 .clear-btn i {
     margin-right: 5px;
 }
 
-.cp:hover {
-    background-color: #357a4b;
-}
-
 .clear-btn:hover {
     background-color: #e53935;
 }
+
+.clear-btn:hover::after {
+    content: "Clear Quote";
+    position: absolute;
+    bottom: calc(100% + 20px);
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #000;
+    color: #fff;
+    padding: 8px 12px;
+    border-radius: 6px;
+    white-space: nowrap;
+    font-size: 0.9rem;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+    opacity: 1;
+    transition: opacity 0.2s ease-in-out;
+}
+
+/* Tooltip arrow */
+.clear-btn:hover::before {
+    content: "";
+    position: absolute;
+    bottom: calc(100% + 3px);
+    left: 50%;
+    transform: translateX(-50%);
+    transform: scale(5);
+    border-width: 5px;
+    border-style: solid;
+    border-color: #000 transparent transparent transparent;
+    z-index: 10;
+}
+
 
 @keyframes gradientRotate {
     0% {
